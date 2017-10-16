@@ -1,38 +1,14 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
-                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<!DOCTYPE> 
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:c="http://java.sun.com/jsp/jstl/core"
-      xmlns:fn="http://java.sun.com/jsp/jstl/functions"> 
+      xmlns:h="http://java.sun.com/jsf/html"> 
 
 	<h:head>
-		<title>Aplicação Exemplo - Manutenção de Contatos</title>
-		<style type="text/css">
-			body {
-				  font-family: Verdana, Arial, Helvetica, sans-serif;
-				  font-size: 14px;
-			}
-			.header {
-				  font-family: Verdana, Arial, Helvetica, sans-serif;
-				  font-size: 18px;
-			}
-			.title {
-				  font-family: Verdana, Arial, Helvetica, sans-serif;
-				  font-weight:bold;
-				  font-size: 16px;
-			}
-			.bottom {
-				  font-family: Verdana, Arial, Helvetica, sans-serif;
-				  font-size: 9px;
-				  text-align: center;
-				  vertical-align: middle;
-				  color: #8E969D;
-			}
-		</style>
+		<title>Cadastro de Funcionario - Menu</title>
 	</h:head> 
-	<body bgcolor="#FFFFCC"> 
-		
+	<body>
+		<h:commandLink action="/funcionario/cadastroFuncionario" value="Cadastro Funcionario"/>
+		<hr/>
+		<h:commandLink action="/funcionario/filtroPesquisaFuncionario" value="Pesquisa Funcionario"/>
 	</body> 
 </html>
