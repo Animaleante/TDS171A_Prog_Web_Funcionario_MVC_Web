@@ -1,4 +1,4 @@
-<!DOCTYPE> 
+<!DOCTYPE html> 
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"> 
@@ -7,8 +7,10 @@
 		<title>Cadastro de Funcionario - Menu</title>
 	</h:head> 
 	<body>
-		<h:commandLink action="/funcionario/cadastroFuncionario" value="Cadastro Funcionario"/>
-		<hr/>
-		<h:commandLink action="/funcionario/filtroPesquisaFuncionario" value="Pesquisa Funcionario"/>
+		<h:form>
+			<h:commandLink action="/funcionario/cadastroFuncionario" value="Cadastro Funcionario" />
+			<hr/>
+			<h:commandLink action="/funcionario/pesquisaFuncionario" value="Pesquisa Funcionario" />
+		</h:form>
 	</body> 
 </html>
