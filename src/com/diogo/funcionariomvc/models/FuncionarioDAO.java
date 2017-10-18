@@ -14,7 +14,7 @@ import com.diogo.funcionariomvc.vos.Professor;
 import com.diogo.funcionariomvc.vos.Secretario;
 
 public class FuncionarioDAO implements IFuncionarioDAO {
-	
+
 	public FuncionarioDAO() {
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
@@ -35,7 +35,7 @@ public class FuncionarioDAO implements IFuncionarioDAO {
 			sttm.setInt(3, (funcionario instanceof Professor ? 3 : (funcionario instanceof Secretario ? 2 : 1)));
 
 			sttm.executeUpdate();
-			
+
 			if (sttm != null)
 				sttm.close();
 
@@ -70,9 +70,9 @@ public class FuncionarioDAO implements IFuncionarioDAO {
 			while(rs.next()) {
 				String nome = rs.getString("nome");
 				double salario = rs.getDouble("salario");
-				
+
 				Funcionario f = null;
-				
+
 				switch(rs.getInt("tipo")) {
 					case 1:
 						f = new Diretor(nome, salario);
@@ -84,10 +84,10 @@ public class FuncionarioDAO implements IFuncionarioDAO {
 						f = new Professor(nome, salario);
 						break;
 				}
-				
+
 				list.add(f);
 			}
-			
+
 			if (sttm != null)
 				sttm.close();
 
