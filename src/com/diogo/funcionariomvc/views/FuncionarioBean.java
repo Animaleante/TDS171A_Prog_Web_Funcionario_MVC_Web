@@ -1,6 +1,7 @@
 package com.diogo.funcionariomvc.views;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
@@ -28,6 +29,8 @@ public class FuncionarioBean implements Serializable {
 	private double salarioFuncionario;
     private String tipoFuncionario;
 
+    private List<Funcionario> listaFuncionarios;
+
 	public FuncionarioBean() {
 	    controller = new FuncionarioController();
 
@@ -39,6 +42,16 @@ public class FuncionarioBean implements Serializable {
 	public String incluir() {
 	    Funcionario funcionario = null;
 	    FacesContext context = FacesContext.getCurrentInstance();
+
+	    if(getNomeFuncionario() == null || getNomeFuncionario().isEmpty()) {
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nome não pode ser vazio!", null));
+            return "/funcionario/cadastroFuncionario";
+	    }
+
+        if(getSalarioFuncionario() < 0) {
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Salario não pode ser negativo!", null));
+            return "/funcionario/cadastroFuncionario";
+        }
 
 	    switch(getTipoFuncionario()) {
 	        case "1":
@@ -66,6 +79,41 @@ public class FuncionarioBean implements Serializable {
         setTipoFuncionario("");
 
 		return "/funcionario/resultadoCadastroFuncionario";
+	}
+
+	public String pesquisar() {
+        FacesContext context = FacesContext.getCurrentInstance();
+
+        if(getNomeFuncionario() == null) {
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nome não pode ser vazio!", null));
+            return "/funcionario/pesquisaFuncionario";
+        }
+
+        if(getNomeFuncionario().isEmpty()) {
+            setListaFuncionarios(controller.listarAll());
+
+            if(getListaFuncionarios() == null) {
+                context.addMessage(null,
+                  new FacesMessage(FacesMessage.SEVERITY_ERROR, "Problema ao buscar lista de funcionarios.", null));
+                return "/funcionario/pesquisaFuncionario";
+            }
+        } else {
+            setListaFuncionarios(controller.listar(getNomeFuncionario()));
+
+            if(getListaFuncionarios() == null) {
+                context.addMessage(null,
+                  new FacesMessage(FacesMessage.SEVERITY_ERROR, "Problema ao buscar lista de funcionarios.", null));
+                return "/funcionario/pesquisaFuncionario";
+            }
+        }
+
+        return "/funcionario/resultadoPesquisaFuncionario";
+	}
+
+	public String limpaPesquisa() {
+	    listaFuncionarios = null;
+	    nomeFuncionario = "";
+	    return "/index";
 	}
 
 	/**
@@ -112,5 +160,21 @@ public class FuncionarioBean implements Serializable {
     public void setSalarioFuncionario(double pSalarioFuncionario)
     {
         salarioFuncionario = pSalarioFuncionario;
+    }
+
+    /**
+     * @return the listaFuncionarios
+     */
+    public List<Funcionario> getListaFuncionarios()
+    {
+        return listaFuncionarios;
+    }
+
+    /**
+     * @param pListaFuncionarios the listaFuncionarios to set
+     */
+    public void setListaFuncionarios(List<Funcionario> pListaFuncionarios)
+    {
+        listaFuncionarios = pListaFuncionarios;
     }
 }

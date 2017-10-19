@@ -37,7 +37,7 @@ public class FuncionarioView {
 				listar();
 				break;
 			case 9:
-				System.out.println("Até mais!");
+				System.out.println("Atï¿½ mais!");
 				break;
 			default:
 				System.out.println("Opcao escolhida invalida!\n");
@@ -73,11 +73,11 @@ public class FuncionarioView {
 		if(funcionarioController.incluir(funcionario))
 			System.out.println("Funcionario incluido com sucesso!");
 		else 
-			System.out.println("Não foi possivel inserir esse funcionario.");
+			System.out.println("Nï¿½o foi possivel inserir esse funcionario.");
 	}
 
 	private void listar() {
-		List<Funcionario> list = funcionarioController.listar();
+		List<Funcionario> list = funcionarioController.listarAll();
 		
 		if(list == null) {
 			System.out.println("Houve um erro ao tentar listar os funcionarios.");

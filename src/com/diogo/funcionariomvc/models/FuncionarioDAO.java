@@ -108,4 +108,59 @@ public class FuncionarioDAO implements IFuncionarioDAO {
 		return null;
 	}
 
+    @Override
+    public List<Funcionario> listar(String nomeFunc)
+    {
+        Connection connection = null;
+        try {
+            connection = DriverManager.getConnection("jdbc:oracle:thin:@//localhost:1521/xe", "aluno", "aluno");
+
+            PreparedStatement sttm = connection.prepareStatement("select * from funcionarios where upper(nome) like upper(?)");
+            sttm.setString(1, "%"+nomeFunc+"%");
+
+            ResultSet rs = sttm.executeQuery();
+
+            List<Funcionario> list = new ArrayList<Funcionario>();
+            while(rs.next()) {
+                String nome = rs.getString("nome");
+                double salario = rs.getDouble("salario");
+
+                Funcionario f = null;
+
+                switch(rs.getInt("tipo")) {
+                    case 1:
+                        f = new Diretor(nome, salario);
+                        break;
+                    case 2:
+                        f = new Secretario(nome, salario);
+                        break;
+                    case 3:
+                        f = new Professor(nome, salario);
+                        break;
+                }
+
+                list.add(f);
+            }
+
+            if (sttm != null)
+                sttm.close();
+
+            sttm = null;
+
+            return list;
+        } catch (SQLException Except) {
+            System.out.println("fodeu");
+            Except.printStackTrace();
+        } finally {
+            if (connection != null)
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+        }
+        System.out.println("fodeu");
+        return null;
+    }
+
 }

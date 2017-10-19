@@ -7,5 +7,20 @@
 		<title>Cadastro de Funcionario - Resultados da Pesquisa</title>
 	</h:head> 
 	<body>
+		<H1>Lista de Funcionarios</H1>
+	
+		<h:dataTable value="#{funcionarioBean.listaFuncionarios}" var="funcionario">
+			<h:column>
+				<f:facet name="header">Nome</f:facet>
+				<h:outputText value="#{funcionario.nome}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">Salario</f:facet>
+				<h:outputText value="#{funcionario.salario}" />
+			</h:column>
+		</h:dataTable>
+		<h:form>
+			<h:commandButton action="#{funcionarioBean.limpaPesquisa()}" value="Voltar" />
+		</h:form>
 	</body> 
 </html>

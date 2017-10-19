@@ -7,5 +7,21 @@
 		<title>Cadastro de Funcionario - Pesquisa</title>
 	</h:head> 
 	<body>
+		<h:form>
+			<h:messages globalOnly="true" errorClass="error"/>
+		
+			<h:outputText value="Nome:" />
+			<h:inputText id="nome"  value="#{funcionarioBean.nomeFuncionario}" size="80"
+			             validatorMessage="Nome deve ter no máximo 80 caracteres">
+			    <f:validateLength maximum="80" />
+			</h:inputText>
+			
+			<h:message for="nome" infoClass="info" errorClass="error"/>
+			
+			<hr/>
+			
+			<h:commandButton immediate="true" action="/index" value="Voltar" />
+			<h:commandButton action="#{funcionarioBean.pesquisar()}" value="Pesquisar" />
+		</h:form>
 	</body> 
 </html>

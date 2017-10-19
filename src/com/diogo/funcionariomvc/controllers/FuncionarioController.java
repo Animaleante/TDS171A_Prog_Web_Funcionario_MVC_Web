@@ -7,16 +7,20 @@ import com.diogo.funcionariomvc.vos.Funcionario;
 
 public class FuncionarioController {
 	private FuncionarioModel funcionarioModel;
-	
+
 	public FuncionarioController() {
 		funcionarioModel = new FuncionarioModel();
 	}
-	
+
 	public boolean incluir(Funcionario funcionario) {
 		return funcionarioModel.incluir(funcionario);
 	}
-	
-	public List<Funcionario> listar() {
+
+	public List<Funcionario> listarAll() {
 		return funcionarioModel.listar();
+	}
+
+	public List<Funcionario> listar(String nome) {
+        return funcionarioModel.listar(nome);
 	}
 }
